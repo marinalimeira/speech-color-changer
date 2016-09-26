@@ -1,0 +1,35 @@
+body {
+  font-family: "Yanone Kaffeesatz", sans-serif;
+  text: #fff;
+  background-color: #003366;
+  font-size: 50px;
+  margin: 0;
+}
+
+#startImage {
+  height: 350px;
+  width: 375px;
+}
+
+#startButton {
+  margin: 20px;
+}
+
+footer {
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+}
+
+#color {
+  margin-top: 20px;
+  color: white;
+  text-shadow: 2px 2px 4px #000;
+  border-bottom: 10px;
+}
+
+#errorReport {
+  text: red;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>=^.^=</title>
+
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+    </style>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div align="center">
+      <button id="startButton" onclick="startButton(event)">
+        <img id="startImage" src="images/pusheen.png" alt="Start">
+      </button>
+    </div>
+
+    <footer>
+      <span id="errorReport"></span>
+      <div id="results">
+        <span id="textSpan"></span>
+      </div>
+    </footer>
+  </body>
+
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    var socket = io();
+    var parsingInProgress = false;
+    var transcript = "";
+    var color = "";
+
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+    var recognition = new SpeechRecognition();
+
+    recognition.continuous = true;
+    recognition.interimResults = false;
+
+    var bg = document.querySelector('footer');
+
+    recognition.onstart = function() {
+      parsingInProgress = true;
+      errorReport.innerHTML = "";
+      startImage.src = 'images/pusheen.gif';
+    }
+
+    recognition.onresult = function(event) {
+      for (var i = event.resultIndex; i < event.results.length; ++i) {
+        color = event.results[i][0].transcript ;
+        bg.style.backgroundColor = color;
+        transcript = "<div id='color'>" + color + "</div>"
+        socket.emit('command', event.results[i][0].transcript);
+      }
+
+      textSpan.innerHTML = transcript;
+    }
+
+    recognition.onerror = function(event) {
+      errorReport.innerHTML = "Error Code: " + event.error;
+      parsingInProgress = false;
+      startImage.src = 'images/arnold_error.jpg';
+    }
+
+    recognition.onend = function() {
+      parsingInProgress = false;
+      if (errorReport.innerHTML == ""){
+        startImage.src = 'images/pusheen.png';
+      }
+    }
+
+    function startButton(event) {
+      if (parsingInProgress) {
+        recognition.stop();
+        return;
+      }
+
+      transcript = "";
+      recognition.lang = 'en-US'
+      recognition.start();
+    }
+  </script>
+</html>
