@@ -5,6 +5,8 @@ var io = require('socket.io')(http);
 var log = true;
 var mqtt = require('mqtt');
 
+var port = process.env.PORT || 8080;
+
 var mqttClient  = mqtt.connect('mqtt://test.mosquitto.org')
 var mqttTopic = "marinalimeira/nodebots/rgb";
 
@@ -26,6 +28,6 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(8080, function(){
-  console.log('HTTP listening on *:8080');
+http.listen(port, function(){
+  console.log('HTTP listening on *:' + port);
 });
