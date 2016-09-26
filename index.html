@@ -11,6 +11,7 @@
   </head>
 
   <body>
+    <h1>Click on Pusheen to start record</h1>
     <div align="center">
       <button id="startButton" onclick="startButton(event)">
         <img id="startImage" src="images/pusheen.png" alt="Start">
@@ -60,14 +61,15 @@
 
     recognition.onerror = function(event) {
       errorReport.innerHTML = "Error Code: " + event.error;
+      textSpan.innerHTML = "";
       parsingInProgress = false;
-      startImage.src = 'images/arnold_error.jpg';
+      startImage.src = "images/pusheen-error.png";
     }
 
     recognition.onend = function() {
       parsingInProgress = false;
       if (errorReport.innerHTML == ""){
-        startImage.src = 'images/pusheen.png';
+        startImage.src = "images/pusheen.png";
       }
     }
 
