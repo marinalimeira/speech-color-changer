@@ -1,6 +1,10 @@
 {
   "name": "speech-color-change",
   "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "express": "^4.14.0",
     "johnny-five": "^0.10.0",
