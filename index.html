@@ -11,11 +11,19 @@
   </head>
 
   <body>
-    <h1>Click on Pusheen to start record</h1>
     <div align="center">
       <button id="startButton" onclick="startButton(event)">
         <img id="startImage" src="images/pusheen.png" alt="Start">
       </button>
+
+      <div class="instructions">
+        <h3>Instructions</h3>
+        <ol>
+          <li>Click on Pusheen to start record</li>
+          <li>Say the name of any color</li>
+          <li>Done. :tada:</li>
+        </ol>
+      </div>
     </div>
 
     <footer>
@@ -52,7 +60,7 @@
       for (var i = event.resultIndex; i < event.results.length; ++i) {
         color = event.results[i][0].transcript ;
         bg.style.backgroundColor = color;
-        transcript = "<div id='color'>" + color + "</div>"
+        transcript = "<div id='color'>" + color + "</div>";
         socket.emit('command', event.results[i][0].transcript);
       }
 
@@ -63,13 +71,13 @@
       errorReport.innerHTML = "Error Code: " + event.error;
       textSpan.innerHTML = "";
       parsingInProgress = false;
-      startImage.src = "images/pusheen-error.png";
+      startImage.src = 'images/pusheen-error.png';
     }
 
     recognition.onend = function() {
       parsingInProgress = false;
       if (errorReport.innerHTML == ""){
-        startImage.src = "images/pusheen.png";
+        startImage.src = 'images/pusheen.png';
       }
     }
 

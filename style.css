@@ -38,3 +38,7 @@ footer {
 #errorReport {
   text: red;
 }
+
+.instructions {
+  display: inline-block;
+}
