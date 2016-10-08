@@ -2,7 +2,7 @@ var mqtt = require("mqtt");
 var five = require("johnny-five");
 
 five.Board().on("ready", function() {
-  var client = mqtt.connect("mqtt://test.mosquitto.org");
+  var client = mqtt.connect("mqtt://broker.hivemq.com");
 
   client.on('connect', function () {
     client.subscribe('marinalimeira/nodebots/rgb');

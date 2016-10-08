@@ -7,7 +7,7 @@ var mqtt = require('mqtt');
 
 var port = process.env.PORT || 8080;
 
-var mqttClient  = mqtt.connect('mqtt://test.mosquitto.org')
+var mqttClient  = mqtt.connect('mqtt://broker.hivemq.com')
 var mqttTopic = "marinalimeira/nodebots/rgb";
 
 mqttClient.on('connect', function () {
